@@ -4,7 +4,7 @@ class MoviesController < ApplicationController
   end
 
   def index
-
+    @movies = Movie.paginate(page: params[:page], per_page: 16)
   end
 
   def create
@@ -16,6 +16,7 @@ class MoviesController < ApplicationController
   end
 
   def show
-
+    @movie = Movie.find_by(slug: params[:slug])
+    render html: "pelicula: #{@movie.title}"
   end
 end

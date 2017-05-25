@@ -4,7 +4,10 @@ class Movie < ApplicationRecord
 
 
   def slugify(string)
-    puts "what the fuck"
-    string.sub(' ', '-')
+    string.downcase.sub(' ', '-')
+  end
+
+  def to_param
+    slug
   end
 end
