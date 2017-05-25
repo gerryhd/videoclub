@@ -1,3 +1,14 @@
 // Place all the styles related to the Movies controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+  background-color: #CCCCCC;
+}
+
+.movie-container {
+  background-color: #EFEFEF;
+  border: 2px solid #DADADA;
+  border-radius: 5px;
+  width: 50%
+}

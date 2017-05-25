@@ -17,6 +17,5 @@ class MoviesController < ApplicationController
 
   def show
     @movie = Movie.find_by(slug: params[:slug])
-    render html: "pelicula: #{@movie.title}"
   end
 end
