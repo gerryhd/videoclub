@@ -10,5 +10,12 @@ body {
   background-color: #EFEFEF;
   border: 2px solid #DADADA;
   border-radius: 5px;
-  width: 50%
+  width: 50%;
+  margin: auto;
+  padding: 60px 50px;
 }
+
+.movie-info {
+  overflow: auto;
+}
+
