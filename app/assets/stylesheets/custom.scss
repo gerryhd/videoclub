@@ -1,6 +1,12 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}
+
 .body-content {
   margin-top: 100px;
   margin-bottom: 50px;
@@ -8,4 +14,30 @@
 
 .movie-panel {
   padding-bottom: 25px;
+}
+
+/* login */
+
+.auth-form {
+  background-color: #EFEFEF;
+  border: 2px solid #717477;
+  border-radius: 5px;
+  width: 25%;
+  margin: auto;
+  padding: 50px;
+}
+
+input, textures, select {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box-sizing;
+}
+input {
+  height: auto !important;
+}
+
+.centered {
+  margin: 0 auto;
+
 }

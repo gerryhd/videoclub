@@ -10,9 +10,9 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#peliculas">PELÍCULAS</a></li>
-        <li><a href="#login">INICIAR SESIÓN</a></li>
-        <li><a href="#signup">REGISTRARSE</a></li>
+        <li><%= link_to "PELÍCULAS", movies_path %></li>
+        <li><%= link_to "INICIAR SESIÓN", user_login_path %></li>
+        <li><%= link_to "REGISTRARSE", new_user_registration_path %></li>
       </ul>
     </div>
   </div>
