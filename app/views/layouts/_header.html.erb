@@ -10,9 +10,18 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+            <li><a> <%= current_user.email %></a></li>
+        <% end %>
         <li><%= link_to "PELÍCULAS", movies_path %></li>
-        <li><%= link_to "INICIAR SESIÓN", user_login_path %></li>
-        <li><%= link_to "REGISTRARSE", new_user_registration_path %></li>
+        <% if user_signed_in? %>
+
+            <li><%= link_to "RENTAR", rent_a_movie_path %></li>
+            <li><%= link_to "SALIR", destroy_user_session_path, :method => :delete %></li>
+        <% else %>
+          <li><%= link_to "INICIAR SESIÓN", user_login_path %></li>
+          <li><%= link_to "REGISTRARSE", new_user_registration_path %></li>
+        <% end %>
       </ul>
     </div>
   </div>
