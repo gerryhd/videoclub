@@ -1,0 +1,18 @@
+<div class="container-fluid movie-container">
+  <div class="row">
+    <div class="col-sm-6 movie-info">
+      <h2><%= @movie.title %></h2>
+      <h4><%= @movie.year %></h4>
+      <p><%= @movie.description %></p>
+
+    </div>
+    <div class="col-sm-6">
+      <%= image_tag("https://placehold.it/320x480?text=IMAGE",
+                    class: "poster img-responsive center-block",
+                    alt: "Poster de #{@movie.title}") %>
+    </div>
+    <div class="col-sm-8">
+      <button class="btn btn-default btn-lg">Rentar</button>
+    </div>
+  </div>
+</div>
