@@ -11,13 +11,12 @@
 
   <body>
     <%= render 'layouts/header' %>
-    <% if notice %>
-        <p class="alert alert-success"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-        <p class="alert alert-danger"><%= alert %></p>
-    <% end %>
-    <div class="body-content"><%= yield %></div>
+
+    <div class="body-content">
+      <%= render 'partials/devise_err' %>
+      <%= yield %>
+    </div>
 
   </body>
+
 </html>
