@@ -11,11 +11,27 @@ class MoviesController < ApplicationController
 
   end
 
-  def update
+  def edit
+    @movie = Movie.find_by(slug: params[:slug])
+  end
 
+  def update
+    @movie = Movie.find_by(slug: params[:slug])
+    if @movie.update_attributes(movie_params)
+      flash[:success] = "Los datos han sido actualizados."
+      redirect_to @movie
+    else
+      render 'edit'
+    end
   end
 
   def show
     @movie = Movie.find_by(slug: params[:slug])
+  end
+
+  private
+
+  def movie_params
+    params.require(:movie).permit(:title, :year, :description)
   end
 end
