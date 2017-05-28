@@ -37,3 +37,31 @@ body {
 .new-details {
   margin: auto;
 }
+
+.rent-list {
+  background-color: #EFEFEF;
+  border: 2px solid #717477;
+  border-radius: 5px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 50px;
+}
+
+
+.rent-item {
+  margin: 20px;
+  clear: both;
+
+  border-bottom: 2px solid grey;
+}
+
+.title {
+  
+  padding-bottom: 10px;
+}
+
+.delete{
+  color: red;
+  padding-bottom: 10px;
+
+}

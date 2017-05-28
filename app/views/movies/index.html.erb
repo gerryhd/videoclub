@@ -2,22 +2,7 @@
 <div class="container">
   <%= will_paginate %>
   <div class="row">
-    <% @movies.each do |movie| %>
-      <div class="col-md-3 movie-panel">
-        <div class="panel panel-info text-center">
-          <div class="panel-heading"><strong><%= movie.title %></strong>
-            <% if !(current_admin == nil) %>
-            <small><%= link_to "editar", edit_movie_path(movie) %></small>
-            <% end %>
-          </div>
-          <div class="panel-body"> <%=link_to image_tag("https://placehold.it/160x240?text=IMAGE",
-                                                        class: "img-responsive center-block",
-                                                        alt: "Poster de #{movie.title}"),
-                                              movie %> </div>
-          <div class="panel-footer text-center">(<%= movie.year %>)</div>
-        </div>
+    <%= render 'partials/catalog', renting: false %>
 
-      </div>
-    <% end %>
   </div>
 </div>

@@ -1,2 +1,23 @@
-<h1>Movies#make_a_rent</h1>
-<p>Find me in app/views/movies/make_a_rent.html.erb</p>
+
+<div class="row">
+
+  <div class="col-md-6 col-md-offset-3 col-sm-4 col-sm-offset-4">
+    <div class="rent-list">
+      <h2>Carrito de renta</h2>
+
+        <% @rent_cart.each do |rent_item| %>
+
+            <div class="row rent-item">
+              <div class="col-md-4 col-md-offset-2 title">
+                <%= rent_item.movie.title %>
+              </div>
+              <div class="col-md-4 col-md-offset-2 delete"><%= link_to "x", remove_path(id: rent_item.id),
+                                              method: :post %>
+              </div>
+            </div>
+
+        <% end %>
+
+    </div>
+  </div>
+</div>
