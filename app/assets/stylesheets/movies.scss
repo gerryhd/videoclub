@@ -47,21 +47,22 @@ body {
   padding: 50px;
 }
 
-
-.rent-item {
-  margin: 20px;
-  clear: both;
-
-  border-bottom: 2px solid grey;
+.rent-item:nth-child(even) {
+  background-color: seashell;
 }
 
-.title {
-  
-  padding-bottom: 10px;
+input[id=text] {
+  width: 130px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
 }
 
-.delete{
-  color: red;
-  padding-bottom: 10px;
+/* When the input field gets focus, change its width to 100% */
+input[id=text]:focus {
+  width: 100%;
+}
 
+.movie-catalog {
+  opacity: 0;
+  display: none;
 }

@@ -2,9 +2,8 @@ class RentItem < ApplicationRecord
   belongs_to :movie
   belongs_to :rent
 
-  validates :movie, uniqueness: true
-  validate :movie_present
-  validate :rent_present
+  validates :movie_id, uniqueness: {scope: :movie_id}
+
 
   def movie_present
     if movie.nil?
@@ -12,9 +11,12 @@ class RentItem < ApplicationRecord
     end
   end
 
-  def rent_present
-    if rent.nil?
-      errors.add(:rent, "is not a valid rent.")
+  def self.renting?(movie_id, rent_id)
+    movie = RentItem.find_by(movie_id: movie_id, rent_id: rent_id)
+    if movie
+      return true
+    else
+      return false
     end
   end
 end

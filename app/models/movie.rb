@@ -4,7 +4,7 @@ class Movie < ApplicationRecord
   has_many :rent_items
   def create_slug
     unless self.title.nil?
-      self.slug = self.title.downcase.sub(' ', '-')
+      self.slug = self.title.downcase.gsub(' ', '-')
     end
   end
 

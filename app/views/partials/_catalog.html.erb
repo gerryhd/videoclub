@@ -1,4 +1,6 @@
-
+<%= text_field_tag "search_query", nil, placeholder: "Filtrar..", class: 'form-control' %>
+<%= will_paginate %>
+<div class="row">
 <% @movies.each do |movie| %>
     <div class="col-md-3 movie-panel">
       <div class="panel panel-info text-center">
@@ -21,3 +23,4 @@
 
     </div>
 <% end %>
+</div>

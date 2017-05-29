@@ -1,23 +1,41 @@
 
 <div class="row">
 
+  <div id="catalogo" class="container <% if @page != nil %>collapse in<% else %>collapse<% end %>" style="width: 75%;">
+    <%= render 'partials/catalog', renting: true %>
+  </div>
+  <button data-toggle="collapse" data-target="#catalogo">Agregar película</button>
   <div class="col-md-6 col-md-offset-3 col-sm-4 col-sm-offset-4">
     <div class="rent-list">
-      <h2>Carrito de renta</h2>
-
+      <h2>Confirmar renta</h2>
+        <div class="container-fluid">
         <% @rent_cart.each do |rent_item| %>
 
-            <div class="row rent-item">
-              <div class="col-md-4 col-md-offset-2 title">
-                <%= rent_item.movie.title %>
-              </div>
-              <div class="col-md-4 col-md-offset-2 delete"><%= link_to "x", remove_path(id: rent_item.id),
-                                              method: :post %>
+            <div class="col-md-8 col-md-offset-2 rent-item">
+              <div class="row">
+                <div class="col-md-4 title">
+                  <%= rent_item.movie.title %>
+                </div>
+                <div class="col-md-2 delete"><%= link_to "x", remove_path(id: rent_item.movie.id),
+                                                method: :post %>
+                </div>
               </div>
             </div>
 
         <% end %>
-
+        </div>
     </div>
   </div>
 </div>
+
+<script>
+    $("#search_query").on("keyup", function(){
+        $.ajax({
+            complete:function(request){},
+            data:'search_query='+ $(this).val(),
+            dataType:'script',
+            type:'get',
+            url: '/rent_a_movie'
+        })
+    });
+</script>

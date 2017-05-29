@@ -4,12 +4,21 @@ class MoviesController < ApplicationController
 
   helper_method :current_rent
   def make_a_rent
+    @page = params[:page]
+    @movies = Movie.paginate(page: params[:page], per_page: 4)
     @movie = Movie.find_by(slug: params[:slug])
 
     unless (@movie.nil?)
       @rent = current_rent
-      @rent_item = @rent.rent_items.create(movie: @movie)
-      @rent.save
+      if (RentItem.renting?(@movie.id, current_rent.id))
+        byebug
+      else
+
+        @rent_item = @rent.rent_items.create!(rent: @rent, movie: @movie)
+
+        @rent.save
+      end
+
       session[:rent_id] = @rent.id
 
     end
@@ -43,18 +52,17 @@ class MoviesController < ApplicationController
   end
 
   def remove_rent_item
-    current_rent.rent_items.find(params[:id]).destroy
+    current_rent.rent_items.find_by(movie_id: params[:id]).destroy
     redirect_to make_a_rent_path
   end
 
-
   private
     def current_rent
-      if !session[:rent_id].nil?
-        Rent.find(session[:rent_id])
-      else
-        Rent.create!(user: current_user)
+
+      if current_user.rent.nil?
+        current_user.rent = Rent.create!(user: current_user)
       end
+      current_user.rent
     end
 
     def movie_params
