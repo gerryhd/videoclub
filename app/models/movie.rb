@@ -1,10 +1,11 @@
 class Movie < ApplicationRecord
-  before_validation { self.slug = slugify(self.title) }
-  validates :slug, presence: true, uniqueness: true
+  before_save { create_slug }
 
-
-  def slugify(string)
-    string.downcase.sub(' ', '-')
+  has_many :rent_items
+  def create_slug
+    unless self.title.nil?
+      self.slug = self.title.downcase.gsub(' ', '-')
+    end
   end
 
   def to_param

@@ -37,3 +37,32 @@ body {
 .new-details {
   margin: auto;
 }
+
+.rent-list {
+  background-color: #EFEFEF;
+  border: 2px solid #717477;
+  border-radius: 5px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 50px;
+}
+
+.rent-item:nth-child(even) {
+  background-color: seashell;
+}
+
+input[id=text] {
+  width: 130px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+/* When the input field gets focus, change its width to 100% */
+input[id=text]:focus {
+  width: 100%;
+}
+
+.movie-catalog {
+  opacity: 0;
+  display: none;
+}
