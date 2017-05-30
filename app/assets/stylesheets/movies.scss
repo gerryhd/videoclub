@@ -24,16 +24,6 @@ body {
   margin-bottom: 10px;
 }
 
-
-.movie-container {
-  background-color: #EFEFEF;
-  border: 2px solid #DADADA;
-  border-radius: 5px;
-
-  margin: auto;
-  padding: 60px 50px;
-}
-
 .new-details {
   margin: auto;
 }
@@ -73,4 +63,9 @@ input[id=text]:focus {
 .movie-catalog {
   opacity: 0;
   display: none;
+}
+
+.movie-panel {
+  padding-bottom: 25px;
+
 }

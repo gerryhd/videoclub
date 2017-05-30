@@ -1,0 +1,7 @@
+$('#notices').html("<%= j ( render 'partials/rent_errors', using_ajax: true) %>");
+$('#notices').slideDown(350);
+<% if @redirect %>
+setTimeout(function(){
+    $( location ).attr("href", '<%= j ( movies_url ) %>');
+}, 2000);
+<% end %>
