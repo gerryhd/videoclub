@@ -1,0 +1,7 @@
+<div id="notices" <% if local_assigns[:using_ajax] %> style="display:none;"<% end %>>
+  <% flash.each do |key, value|%>
+      <div class='alert alert-<%= key %>'>
+        <%= value %>
+      </div>
+  <% end %>
+</div>

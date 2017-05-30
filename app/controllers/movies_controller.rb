@@ -3,6 +3,7 @@ class MoviesController < ApplicationController
 
 
   helper_method :current_rent
+  helper_method :should_it_pass?
   def make_a_rent
     @page = params[:page]
     @movies = Movie.paginate(page: params[:page], per_page: 4)
@@ -11,12 +12,13 @@ class MoviesController < ApplicationController
     unless (@movie.nil?)
       @rent = current_rent
       if (RentItem.renting?(@movie.id, current_rent.id))
-
+        flash.now[:info] = "La película ya está en su lista."
       else
 
         @rent_item = @rent.rent_items.create!(rent_cart: @rent, movie: @movie)
 
         @rent.save
+        flash.now[:success] = "#{@movie.title} fue agregada a su lista."
       end
 
       session[:rent_id] = @rent.id
@@ -25,6 +27,11 @@ class MoviesController < ApplicationController
     @rent = current_rent
     @rent_cart = current_rent.rent_items
     @movies = Movie.paginate(page: params[:page], per_page: 4)
+
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
   def index
@@ -65,7 +72,21 @@ class MoviesController < ApplicationController
 
   end
 
+  def confirm_rent
+
+    if should_it_pass?
+      @redirect = true
+      flash.now[:success] = "Su renta fue concretada satisfactoriamente."
+    else
+      flash.now[:danger] = "Su renta no pudo ser concreatada porque presenta adeudos en rentas."
+    end
+
+  end
+
   private
+    def should_it_pass?
+      [true,false].sample
+    end
     def current_rent
 
       if current_user.rent_cart.nil?
