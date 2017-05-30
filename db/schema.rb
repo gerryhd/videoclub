@@ -42,20 +42,18 @@ ActiveRecord::Schema.define(version: 20170528080650) do
     t.index ["slug"], name: "index_movies_on_slug", unique: true
   end
 
+  create_table "rent_carts", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "rent_items", force: :cascade do |t|
     t.integer "movie_id"
-    t.integer "rent_id"
+    t.integer "rent_cart_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["movie_id"], name: "index_rent_items_on_movie_id"
-    t.index ["rent_id"], name: "index_rent_items_on_rent_id"
-  end
-
-  create_table "rents", force: :cascade do |t|
-    t.date "rented_at"
-    t.decimal "total_cost"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.index ["rent_cart_id"], name: "index_rent_items_on_rent_cart_id"
   end
 
   create_table "users", force: :cascade do |t|

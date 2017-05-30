@@ -7,8 +7,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :confirmable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  delegate :movies, to: :rent
-  has_one :rent, foreign_key: :id
+  delegate :movies, to: :rent_cart
+  has_one :rent_cart, foreign_key: :id
 
 
 end

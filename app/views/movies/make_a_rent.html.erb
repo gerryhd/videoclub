@@ -4,19 +4,22 @@
   <div id="catalogo" class="container <% if @page != nil %>collapse in<% else %>collapse<% end %>" style="width: 75%;">
     <%= render 'partials/catalog', renting: true %>
   </div>
-  <button data-toggle="collapse" data-target="#catalogo">Agregar película</button>
-  <div class="col-md-6 col-md-offset-3 col-sm-4 col-sm-offset-4">
+
+  <div class="col-md-6 col-md-offset-3" col-xs-2 col-xs-offset-5>
     <div class="rent-list">
       <h2>Confirmar renta</h2>
         <div class="container-fluid">
+          <% if @rent_cart.first.nil? %>
+              <i>No has agregado ninguna película.</i>
+          <% end %>
         <% @rent_cart.each do |rent_item| %>
 
             <div class="col-md-8 col-md-offset-2 rent-item">
               <div class="row">
-                <div class="col-md-4 title">
+                <div class="col-md-8 title">
                   <%= rent_item.movie.title %>
                 </div>
-                <div class="col-md-2 delete"><%= link_to "x", remove_path(id: rent_item.movie.id),
+                <div class="col-md-4 delete"><%= link_to "x", remove_path(id: rent_item.movie.id),
                                                 method: :post %>
                 </div>
               </div>
@@ -24,6 +27,15 @@
 
         <% end %>
         </div>
+    </div>
+
+  </div>
+  <div class="vertical-menu">
+    <div class="rent-options">
+    <button class="btn btn-default" data-toggle="collapse" data-target="#catalogo">Agregar película</button>
+    </div>
+    <div class="rent-options">
+    <%= link_to "Vaciar lista", empty_rents_path, class: "btn btn-default" %>
     </div>
   </div>
 </div>

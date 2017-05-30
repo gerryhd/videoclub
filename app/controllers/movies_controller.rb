@@ -11,10 +11,10 @@ class MoviesController < ApplicationController
     unless (@movie.nil?)
       @rent = current_rent
       if (RentItem.renting?(@movie.id, current_rent.id))
-        byebug
+
       else
 
-        @rent_item = @rent.rent_items.create!(rent: @rent, movie: @movie)
+        @rent_item = @rent.rent_items.create!(rent_cart: @rent, movie: @movie)
 
         @rent.save
       end
@@ -56,13 +56,22 @@ class MoviesController < ApplicationController
     redirect_to make_a_rent_path
   end
 
+  def empty_rents
+    current_rent.rent_items.each do |movie|
+      movie.destroy
+    end
+
+    redirect_to make_a_rent_path
+
+  end
+
   private
     def current_rent
 
-      if current_user.rent.nil?
-        current_user.rent = Rent.create!(user: current_user)
+      if current_user.rent_cart.nil?
+        current_user.rent_cart = RentCart.create!(user: current_user)
       end
-      current_user.rent
+      current_user.rent_cart
     end
 
     def movie_params

@@ -1,6 +1,6 @@
 class RentItem < ApplicationRecord
   belongs_to :movie
-  belongs_to :rent
+  belongs_to :rent_cart
 
   validates :movie_id, uniqueness: {scope: :movie_id}
 
@@ -11,8 +11,8 @@ class RentItem < ApplicationRecord
     end
   end
 
-  def self.renting?(movie_id, rent_id)
-    movie = RentItem.find_by(movie_id: movie_id, rent_id: rent_id)
+  def self.renting?(movie_id, rent_cart_id)
+    movie = RentItem.find_by(movie_id: movie_id, rent_cart_id: rent_cart_id)
     if movie
       return true
     else
