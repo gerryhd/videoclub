@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :admins
   get '/rent_a_movie/delete', to: 'movies#empty_rents', as: "empty_rents"
+  get '/rent_a_movie/confirm', to: 'rents#create', as: "confirm_rent"
   get '/rent_a_movie(/:slug)', to: 'movies#make_a_rent', as: "make_a_rent"
   post '/rent_a_movie', to: 'movies#remove_rent_item', as: "remove"
 
