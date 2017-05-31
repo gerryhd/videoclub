@@ -1,0 +1,79 @@
+// Place all the styles related to the Movies controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+  background-color: #CCCCCC;
+}
+
+.movie-container {
+  background-color: #EFEFEF;
+  border: 2px solid #DADADA;
+  border-radius: 5px;
+  width: 50%;
+  margin: auto;
+  padding: 60px 50px;
+}
+
+.movie-info {
+  overflow: auto;
+}
+
+.pagination {
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.new-details {
+  margin: auto;
+}
+
+.rent-list {
+  background-color: #EFEFEF;
+  border: 2px solid #717477;
+  border-radius: 5px;
+  width: 100%;
+  padding: 50px;
+  float: left;
+}
+
+.rent-options {
+  margin: auto;
+  padding-bottom: 10px;
+  @media only screen and (max-width: 500px) {
+    text-align: center;
+  }
+}
+
+.rent-item:nth-child(even) {
+  background-color: seashell;
+}
+
+input[id=text] {
+  width: 130px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+/* When the input field gets focus, change its width to 100% */
+input[id=text]:focus {
+  width: 100%;
+}
+
+.movie-catalog {
+  opacity: 0;
+  display: none;
+}
+
+.movie-panel {
+  padding-bottom: 25px;
+
+}
+
+.movie-form {
+  background-color: #EFEFEF;
+  border: 2px solid #717477;
+  border-radius: 5px;
+  padding: 50px;
+
+}

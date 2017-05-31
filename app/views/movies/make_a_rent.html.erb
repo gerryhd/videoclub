@@ -1,0 +1,65 @@
+
+<div class="row">
+
+
+  <div id="catalogo" class="container <% if @page != nil %>collapse in<% else %>collapse<% end %>" style="width: 75%;">
+    <%= render 'partials/catalog', renting: true %>
+  </div>
+
+  <div class="col-md-6 col-md-offset-3 col-xs-10 col-xs-offset-1">
+
+    <div class="rent-list">
+      <div id="confirm-notice" style="display:none;">
+      </div>
+      <%= render 'partials/rent_errors' %>
+      <h2>Confirmar renta</h2>
+        <div class="container-fluid">
+          <% if @rent_cart.first.nil? %>
+              <i>No has agregado ninguna película. Agregue al menos una película para poder concretar la renta.</i>
+          <% end %>
+        <% @rent_cart.each do |rent_item| %>
+
+            <div class="col-md-8 col-md-offset-2 rent-item">
+              <div class="row">
+                <div class="col-md-8 col-xs-6 title">
+                  <%= rent_item.movie.title %>
+                </div>
+                <div class="col-md-4 col-xs-4 delete"><%= link_to "x", remove_path(id: rent_item.movie.id),
+                                                method: :post %>
+                </div>
+              </div>
+            </div>
+
+        <% end %>
+        </div>
+    </div>
+
+  </div>
+  <div class="vertical-menu">
+    <div class="rent-options">
+      <button class="btn btn-default" data-toggle="collapse" data-target="#catalogo">Agregar película</button>
+    </div>
+    <div class="rent-options">
+      <%= link_to "Vaciar lista", empty_rents_path, class: "btn btn-default" %>
+    </div>
+    <div class="rent-options">
+      <% if @rent_cart.first.nil? %>
+        <%= link_to "Concretar Renta", '#', class: "btn btn-danger disabled"%>
+      <% else %>
+          <%= link_to "Concretar Renta", confirm_rent_path, class: "btn btn-danger", remote: true %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+    $("#search_query").on("keyup", function(){
+        $.ajax({
+            complete:function(request){},
+            data:'search_query='+ $(this).val(),
+            dataType:'script',
+            type:'get',
+            url: '/rent_a_movie'
+        })
+    });
+</script>
