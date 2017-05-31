@@ -1,0 +1,24 @@
+<div class="container-fluid">
+  <div class="row">
+    <%= render 'partials/movie_errors' %>
+    <div class="col-md-6 col-md-offset-3">
+      <div class="movie-form">
+      <%= form_for(@movie, url: create_movie_path) do |f| %>
+          <%= f.label "Título" %>
+          <%= f.text_field :title, class: 'form-control'%>
+
+          <%= f.label "Año de estreno" %>
+          <%= f.number_field :year, class: 'form-control' %>
+
+          <%= f.label "Descripción" %>
+          <%= f.text_area :description, class: 'form-control' %>
+
+          <%= f.label "Poster" %>
+          <%= f.file_field :image, class: 'form-control' %>
+
+          <%= f.submit "Crear Película", class: 'form-control' %>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>

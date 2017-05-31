@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20170528080650) do
     t.text "description"
     t.integer "year"
     t.string "slug"
+    t.string "image"
     t.boolean "available", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

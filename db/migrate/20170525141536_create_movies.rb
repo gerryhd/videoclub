@@ -5,6 +5,7 @@ class CreateMovies < ActiveRecord::Migration[5.1]
       t.text :description
       t.integer :year
       t.string :slug
+      t.string :image
       t.boolean :available, default: true
 
       t.timestamps

@@ -54,6 +54,15 @@ class MoviesController < ApplicationController
     end
   end
 
+  def create
+    @movie = Movie.new(new_movie_params)
+    if @movie.save
+      flash[:success] = "#{@movie.title} ha sido agregada al catálogo."
+    else
+      flash[:danger] = "Ocurrió un error al intentar agregar la película. Revise los campos."
+    end
+  end
+
   def show
     @movie = Movie.find_by(slug: params[:slug])
   end
@@ -83,6 +92,10 @@ class MoviesController < ApplicationController
 
   end
 
+  def new
+    @movie = Movie.new
+  end
+
   private
     def should_it_pass?
       [true,false].sample
@@ -97,5 +110,9 @@ class MoviesController < ApplicationController
 
     def movie_params
       params.require(:movie).permit(:title, :year, :description)
+    end
+
+    def new_movie_params
+      params.require(:movie).permit(:title, :year, :description, :image)
     end
 end
