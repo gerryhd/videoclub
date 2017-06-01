@@ -2,6 +2,8 @@ class Movie < ApplicationRecord
   before_save { create_slug }
   before_save { initialize_availability }
 
+  validates_presence_of :title, :description, :year
+
   mount_uploader :image, ImageUploader
 
   has_many :rent_items
