@@ -10,7 +10,7 @@ class MoviesController < ApplicationController
 
   def make_a_rent
     @page = params[:page]
-    @movies = Movie.paginate(page: params[:page], per_page: 4)
+    @movies = Movie.order('created_at').paginate(page: params[:page], per_page: 4)
     @movie = Movie.find_by(slug: params[:slug])
 
     unless (@movie.nil?)
@@ -36,7 +36,7 @@ class MoviesController < ApplicationController
   end
 
   def index
-    @movies = Movie.paginate(page: params[:page], per_page: 16)
+    @movies = Movie.order('created_at').paginate(page: params[:page], per_page: 16)
   end
 
   def edit
