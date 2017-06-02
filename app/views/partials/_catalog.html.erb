@@ -3,7 +3,7 @@
 <div class="row">
 
 <% @movies.each do |movie| %>
-    <div class="col-md-3 movie-panel">
+    <div class="col-md-3 col-xs-10 col-xs-offset-1 movie-panel">
       <div class="panel panel-info text-center">
         <div class="panel-heading"><strong><%= movie.title %></strong>
           <% if !(current_admin.nil?) %>
