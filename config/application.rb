@@ -26,5 +26,6 @@ module Videoclub
       g.fixture_replacement :factory_girl, dir: "spec/factories"
 
     end
+    config.i18n.default_locale = :'es'
   end
 end
