@@ -1,5 +1,6 @@
 class MoviesController < ApplicationController
   before_action :authenticate_user!, only: [:make_a_rent]
+  before_action :authenticate_admin, only: [:new, :create, :edit]
 
 
   helper_method :current_rent
@@ -12,7 +13,7 @@ class MoviesController < ApplicationController
     unless (@movie.nil?)
       @rent = current_rent
       if (RentItem.renting?(@movie.id, current_rent.id))
-        flash.now[:info] = "La película ya está en su lista."
+        flash.now[:info] = 'La película ya está en su lista.'
       else
 
         @rent_item = @rent.rent_items.create!(rent_cart: @rent, movie: @movie)
@@ -20,9 +21,6 @@ class MoviesController < ApplicationController
         @rent.save
         flash.now[:success] = "#{@movie.title} fue agregada a su lista."
       end
-
-      session[:rent_id] = @rent.id
-
     end
     @rent = current_rent
     @rent_cart = current_rent.rent_items
@@ -68,7 +66,13 @@ class MoviesController < ApplicationController
   end
 
   def remove_rent_item
-    current_rent.rent_items.find_by(movie_id: params[:id]).destroy
+    if(RentItem.renting?(params[:id], current_rent.id))
+      current_rent.rent_items.find_by(movie_id: params[:id]).destroy
+
+    else
+      flash[:danger] = "Error: La película no se encuentra en su lista de renta."
+
+    end
     redirect_to make_a_rent_path
   end
 
@@ -100,6 +104,7 @@ class MoviesController < ApplicationController
     def should_it_pass?
       [true,false].sample
     end
+
     def current_rent
 
       if current_user.rent_cart.nil?

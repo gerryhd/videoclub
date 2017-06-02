@@ -33,8 +33,6 @@ describe User do
 
   end
 
-  it "returns the email as username"
-
   it "does not allow duplicate emails" do
     first_user = FactoryGirl.create(:user)
     first_user.should be_valid

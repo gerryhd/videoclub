@@ -1,4 +1,4 @@
-$('#notices').html("<%= j ( render 'partials/rent_errors', using_ajax: true) %>");
+$('#confirm-notice').html("<%= j ( render 'partials/rent_errors', using_ajax: true) %>");
 $('#notices').slideDown(350);
 <% if @redirect %>
 setTimeout(function(){
