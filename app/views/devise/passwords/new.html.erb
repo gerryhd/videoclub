@@ -3,7 +3,7 @@
 
   <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4">
     <div class="auth-form">
-
+      <%= render 'partials/devise_err' %>
       <h2>¿Olvidó su contraseña?</h2>
 
       <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
