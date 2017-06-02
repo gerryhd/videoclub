@@ -10,9 +10,9 @@ body {
   background-color: #EFEFEF;
   border: 2px solid #DADADA;
   border-radius: 5px;
-  width: 50%;
-  margin: auto;
-  padding: 60px 50px;
+  width: 100%;
+
+  padding: 50px;
 }
 
 .movie-info {
@@ -67,7 +67,11 @@ input[id=text]:focus {
 
 .movie-panel {
   padding-bottom: 25px;
-
+  .panel-body {
+    height: 240px;
+    width: 160px;
+    margin: auto;
+  }
 }
 
 .movie-form {
@@ -75,5 +79,25 @@ input[id=text]:focus {
   border: 2px solid #717477;
   border-radius: 5px;
   padding: 50px;
+
+}
+
+.mini-movie {
+  padding-bottom: 10px;
+  height:200px;
+
+  display: block;
+  text-align: center;
+
+  label{
+    background-color: #F7F7F7;
+    display: block;
+    font-size: 2vh;
+  }
+
+  img.mini-poster {
+    width: 80px;
+    height: 60px;
+  }
 
 }
