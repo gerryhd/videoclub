@@ -45,16 +45,20 @@ class MoviesController < ApplicationController
 
   def update
     @movie = Movie.find_by(slug: params[:slug])
-    if @movie.update_attributes(movie_params)
-      flash[:success] = "Los datos han sido actualizados."
-      redirect_to @movie
-    else
-      render 'edit'
+    movie_params.each do |key, value|
+      unless movie_params[key].to_s.empty?
+        @movie.update_attribute(key, value)
+      else
+        byebug
+      end
     end
+
+    redirect_to @movie
+
   end
 
   def create
-    @movie = Movie.new(new_movie_params)
+    @movie = Movie.new(movie_params)
     if @movie.save
       flash[:success] = "#{@movie.title} ha sido agregada al catálogo."
       redirect_to movies_path
@@ -125,10 +129,7 @@ class MoviesController < ApplicationController
     end
 
     def movie_params
-      params.require(:movie).permit(:title, :year, :description)
-    end
-
-    def new_movie_params
       params.require(:movie).permit(:title, :year, :description, :image)
     end
+
 end

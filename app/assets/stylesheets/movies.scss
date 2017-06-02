@@ -10,7 +10,7 @@ body {
   background-color: #EFEFEF;
   border: 2px solid #DADADA;
   border-radius: 5px;
-  width: 100%;
+
 
   padding: 50px;
 }
@@ -25,7 +25,11 @@ body {
 }
 
 .new-details {
+  border: 1px dashed black;
+  background-color: #EFEFEF;
+  padding: 15px;
   margin: auto;
+
 }
 
 .rent-list {

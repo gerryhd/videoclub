@@ -6,6 +6,8 @@ es:
      next_label: ">"
   activerecord:
     errors:
+      messages:
+        record_invalid: "No se pudo concretar."
       format: "%{message}"
       models:
         user:
