@@ -1,10 +1,13 @@
 class MoviesController < ApplicationController
-  before_action :authenticate_user!, only: [:make_a_rent]
-  before_action :authenticate_admin, only: [:new, :create, :edit]
+  before_action :authenticate_user!, only: [:make_a_rent, :remove_rent_item, :empty_rents,
+                                            :confirm_rent,]
+  before_action :authenticate_admin!, only: [:new, :create, :edit, :update]
 
 
   helper_method :current_rent
   helper_method :should_it_pass?
+  helper_method :clean_movie_list
+
   def make_a_rent
     @page = params[:page]
     @movies = Movie.paginate(page: params[:page], per_page: 4)
@@ -36,8 +39,6 @@ class MoviesController < ApplicationController
     @movies = Movie.paginate(page: params[:page], per_page: 16)
   end
 
-
-
   def edit
     @movie = Movie.find_by(slug: params[:slug])
   end
@@ -56,8 +57,11 @@ class MoviesController < ApplicationController
     @movie = Movie.new(new_movie_params)
     if @movie.save
       flash[:success] = "#{@movie.title} ha sido agregada al catálogo."
+      redirect_to movies_path
+
     else
-      flash[:danger] = "Ocurrió un error al intentar agregar la película. Revise los campos."
+      flash[:danger] = "Ocurrió un error al crear la película. Intente más tarde."
+      redirect_to new_movie_path
     end
   end
 
@@ -77,9 +81,7 @@ class MoviesController < ApplicationController
   end
 
   def empty_rents
-    current_rent.rent_items.each do |movie|
-      movie.destroy
-    end
+    clean_movie_list
 
     redirect_to make_a_rent_path
 
@@ -89,6 +91,9 @@ class MoviesController < ApplicationController
 
     if should_it_pass?
       @redirect = true
+
+      clean_movie_list
+
       flash.now[:success] = "Su renta fue concretada satisfactoriamente."
     else
       flash.now[:danger] = "Su renta no pudo ser concreatada porque presenta adeudos en rentas."
@@ -101,6 +106,12 @@ class MoviesController < ApplicationController
   end
 
   private
+
+    def clean_movie_list
+      current_rent.rent_items.each do |movie|
+        movie.destroy
+      end
+    end
     def should_it_pass?
       [true,false].sample
     end

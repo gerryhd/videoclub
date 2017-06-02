@@ -5,15 +5,15 @@
       <div class="movie-form">
       <%= form_for(@movie, url: create_movie_path) do |f| %>
           <%= f.label "Título" %>
-          <%= f.text_field :title, class: 'form-control'%>
+          <%= f.text_field :title, class: 'form-control', required: true%>
 
           <%= f.label "Año de estreno" %>
-          <%= f.number_field :year, class: 'form-control' %>
+          <%= f.number_field :year, class: 'form-control', required: true %>
 
           <%= f.label "Descripción" %>
-          <%= f.text_area :description, class: 'form-control' %>
+          <%= f.text_area :description, class: 'form-control', required: true %>
 
-          <%= f.label "Poster" %>
+          <%= f.label "Poster (opcional)" %>
           <%= f.file_field :image, class: 'form-control' %>
 
           <%= f.submit "Crear Película", class: 'form-control' %>

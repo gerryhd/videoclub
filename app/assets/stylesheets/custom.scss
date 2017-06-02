@@ -38,3 +38,8 @@ input, textures, select {
 input {
   height: auto !important;
 }
+
+.active {
+  color: #730E15 !important;
+  cursor: default;
+}
