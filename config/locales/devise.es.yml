@@ -1,7 +1,18 @@
 # Additional translations at http://github.com/plataformatec/devise/wiki/I18n
 
 es:
+  activerecord:
+    errors:
+      format: "%{message}"
+      models:
+        user:
+          attributes:
+            email:
+              taken: "Ya hay una cuenta relacionada con este email."
+            password_confirmation:
+              confirmation: "Las contraseñas son distintas."
   errors:
+    unavailable_session: "No hay una sesión presente."
     messages:
       expired: "ha expirado, por favor pida uno nuevo"
       not_found: "no encontrado"
