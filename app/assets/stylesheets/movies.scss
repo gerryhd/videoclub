@@ -67,10 +67,12 @@ input[id=text]:focus {
 
 .movie-panel {
   padding-bottom: 25px;
+  height: 100%;
   .panel-body {
-    height: 240px;
-    width: 160px;
+    height: 260px;
+    width: 180px;
     margin: auto;
+
   }
 }
 
