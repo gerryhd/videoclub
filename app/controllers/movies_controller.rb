@@ -1,9 +1,13 @@
 class MoviesController < ApplicationController
-  before_action :authenticate_user!, only: [:make_a_rent]
+  before_action :authenticate_user!, only: [:make_a_rent, :remove_rent_item, :empty_rents,
+                                            :confirm_rent,]
+  before_action :authenticate_admin!, only: [:new, :create, :edit, :update]
 
 
   helper_method :current_rent
   helper_method :should_it_pass?
+  helper_method :clean_movie_list
+
   def make_a_rent
     @page = params[:page]
     @movies = Movie.paginate(page: params[:page], per_page: 4)
@@ -12,7 +16,7 @@ class MoviesController < ApplicationController
     unless (@movie.nil?)
       @rent = current_rent
       if (RentItem.renting?(@movie.id, current_rent.id))
-        flash.now[:info] = "La película ya está en su lista."
+        flash.now[:info] = 'La película ya está en su lista.'
       else
 
         @rent_item = @rent.rent_items.create!(rent_cart: @rent, movie: @movie)
@@ -20,9 +24,6 @@ class MoviesController < ApplicationController
         @rent.save
         flash.now[:success] = "#{@movie.title} fue agregada a su lista."
       end
-
-      session[:rent_id] = @rent.id
-
     end
     @rent = current_rent
     @rent_cart = current_rent.rent_items
@@ -37,8 +38,6 @@ class MoviesController < ApplicationController
   def index
     @movies = Movie.paginate(page: params[:page], per_page: 16)
   end
-
-
 
   def edit
     @movie = Movie.find_by(slug: params[:slug])
@@ -58,8 +57,11 @@ class MoviesController < ApplicationController
     @movie = Movie.new(new_movie_params)
     if @movie.save
       flash[:success] = "#{@movie.title} ha sido agregada al catálogo."
+      redirect_to movies_path
+
     else
-      flash[:danger] = "Ocurrió un error al intentar agregar la película. Revise los campos."
+      flash[:danger] = "Ocurrió un error al crear la película. Intente más tarde."
+      redirect_to new_movie_path
     end
   end
 
@@ -68,14 +70,18 @@ class MoviesController < ApplicationController
   end
 
   def remove_rent_item
-    current_rent.rent_items.find_by(movie_id: params[:id]).destroy
+    if(RentItem.renting?(params[:id], current_rent.id))
+      current_rent.rent_items.find_by(movie_id: params[:id]).destroy
+
+    else
+      flash[:danger] = "Error: La película no se encuentra en su lista de renta."
+
+    end
     redirect_to make_a_rent_path
   end
 
   def empty_rents
-    current_rent.rent_items.each do |movie|
-      movie.destroy
-    end
+    clean_movie_list
 
     redirect_to make_a_rent_path
 
@@ -85,6 +91,9 @@ class MoviesController < ApplicationController
 
     if should_it_pass?
       @redirect = true
+
+      clean_movie_list
+
       flash.now[:success] = "Su renta fue concretada satisfactoriamente."
     else
       flash.now[:danger] = "Su renta no pudo ser concreatada porque presenta adeudos en rentas."
@@ -97,9 +106,16 @@ class MoviesController < ApplicationController
   end
 
   private
+
+    def clean_movie_list
+      current_rent.rent_items.each do |movie|
+        movie.destroy
+      end
+    end
     def should_it_pass?
       [true,false].sample
     end
+
     def current_rent
 
       if current_user.rent_cart.nil?

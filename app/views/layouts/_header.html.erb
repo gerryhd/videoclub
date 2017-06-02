@@ -7,16 +7,22 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="#">Homieclub</a>
+
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-left">
+        <% if !(current_admin.nil?) %>
+            <li><%= link_to "Admin", '#', class: "active" %></li>
+
+            <li><%= link_to "AGREGAR NUEVA PELÍCULA", new_movie_path%></li>
+        <% end %>
+      </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
             <li><a> <%= current_user.email %></a></li>
         <% end %>
         <li><%= link_to "PELÍCULAS", movies_path %></li>
-        <% if !(current_admin.nil?) %>
-            <li><%= link_to "AGREGAR NUEVA PELÍCULA", new_movie_path %></li>
-        <% end %>
+
         <% if user_signed_in? %>
 
             <li><%= link_to "RENTAR", make_a_rent_path %></li>

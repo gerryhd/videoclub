@@ -28,3 +28,5 @@ end
   description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nisl enim, tempor id ullamcorper vel, posuere eu dui. Ut placerat felis eros, ac sagittis lorem mollis cursus. Aliquam erat volutpat. Integer non risus auctor, imperdiet est tempor, lacinia magna. Vestibulum et ligula quis felis dictum porta. Praesent in turpis semper, finibus nisl eget, convallis metus. Mauris quis maximus eros. Sed dolor nibh, imperdiet ac justo id, bibendum tincidunt neque. Nam dapibus suscipit mattis. Fusce sollicitudin accumsan ligula sed suscipit. Cras."
   Movie.create!(title: title, year: year, description: description)
 end
+
+Admin.create(email: 'admin@homie.mx', password: 'admin123', password_confirmation: 'admin123')
