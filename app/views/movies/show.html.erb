@@ -1,6 +1,6 @@
 <div class="movie-container">
   <div class="row">
-    <div class="col-sm-6 col-xs-12">
+    <div class="col-md-6 col-sm-12">
 
       <% if @movie.image.catalog.url.nil? %>
           <%=image_tag("https://placehold.it/320x480?text=IMAGE",
@@ -12,7 +12,7 @@
                         alt: "Poster de #{@movie.title}")%>
       <% end %>
     </div>
-    <div class="col-sm-6 col-xs-12 movie-info">
+    <div class="col-md-6 col-sm-12 movie-info">
       <h2><%= @movie.title %></h2>
       <h4><%= @movie.year %></h4>
       <p><%= @movie.description %></p>
