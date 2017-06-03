@@ -2,8 +2,8 @@
 
   <div class="row">
     <%= render 'partials/movie_errors' %>
-    <div class="col-md-6 movie-container">
-      <div class="col-sm-6">
+    <div class="col-lg-6 movie-container">
+      <div class="col-md-6">
         <% if @movie.image.catalog.url.nil? %>
             <%=image_tag("https://placehold.it/320x480?text=IMAGE",
                          class: "img-responsive center-block",
@@ -15,7 +15,7 @@
         <% end %>
 
       </div>
-      <div class="col-sm-6 movie-info">
+      <div class="col-md-6 movie-info">
         <h2><%= @movie.title %></h2>
         <h4><%= @movie.year %></h4>
         <p><%= @movie.description %></p>
@@ -24,7 +24,7 @@
 
 
     </div>
-    <div class="col-md-6 new-details">
+    <div class="col-lg-6 new-details">
     <%= form_for(@movie) do |f| %>
       <%= f.label "Título" %>
         <%= f.text_field :title, class: 'form-control', required: true%>

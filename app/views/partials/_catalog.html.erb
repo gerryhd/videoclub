@@ -3,7 +3,7 @@
 <div class="row row-eq-height hidden-sm-down">
 
 <% @movies.each do |movie| %>
-    <div class="col-md-3 hidden-xs movie-panel">
+    <div class="col-lg-3 hidden-xs movie-panel">
       <div class="panel panel-info text-center">
         <div class="panel-heading"><strong><%= movie.title %></strong>
           <% if !(current_admin.nil?) %>
@@ -39,7 +39,7 @@
 <div class="row visible-xs">
   <% @movies.each do |movie| %>
 
-  <div class="col-xs-6">
+  <div class="col-sm-6">
     <div class="mini-movie">
       <label><%= movie.title %></label>
       <% if movie.image.catalog.url.nil? %>
